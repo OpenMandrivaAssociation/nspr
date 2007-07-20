@@ -1,12 +1,13 @@
 %define major_nspr 4
 %define epoch_nspr 2
 %define libname %mklibname nspr %{major_nspr}
+%define develname %mklibname nspr -d
 
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
-Version:	4.6.5
-Release:	%mkrel 4
+Version:	4.6.7
+Release:	%mkrel 1
 License:	MPL/GPL/LGPL
 URL:		http://www.mozilla.org/projects/nspr/
 Group:		System/Libraries
@@ -33,16 +34,17 @@ facilities. These facilities include threads, thread synchronization,
 normal file and network I/O, interval timing and calendar time, basic
 memory management (malloc and free) and shared library linking.
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:	Development libraries for the Netscape Portable Runtime
 Group:		Development/C++
 Requires:	%{libname} = %{epoch_nspr}:%{version}-%{release}
 Obsoletes:	mozilla-nspr-devel
 Obsoletes:	nspr-devel
+Obsoletes:	%{libname}-devel
 Provides:	nspr-devel = %{epoch_nspr}:%{version}-%{release}
 Provides:	libnspr-devel = %{epoch_nspr}:%{version}-%{release}
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Header files for doing development with the Netscape Portable Runtime.
 
 %prep
@@ -119,7 +121,7 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
 %{_libdir}/libplc4.so
 %{_libdir}/libplds4.so
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/nspr4
 %{_libdir}/pkgconfig/nspr.pc
