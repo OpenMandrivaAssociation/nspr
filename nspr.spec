@@ -11,6 +11,7 @@ Release:	%mkrel 1
 License:	MPL/GPL/LGPL
 URL:		http://www.mozilla.org/projects/nspr/
 Group:		System/Libraries
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
