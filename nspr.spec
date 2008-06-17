@@ -7,7 +7,7 @@ Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
 Version:	4.6.8
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	MPL/GPL/LGPL
 URL:		http://www.mozilla.org/projects/nspr/
 Group:		System/Libraries
