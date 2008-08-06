@@ -6,17 +6,16 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
-Version:	4.6.8
-Release:	%mkrel 2
+Version:	4.7.1
+Release:	%mkrel 1
 License:	MPL/GPL/LGPL
-URL:		http://www.mozilla.org/projects/nspr/
 Group:		System/Libraries
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+URL:		http://www.mozilla.org/projects/nspr/
 Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
-Patch2:		nspr-ipv6-numerichost.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Virtual package, not built.
@@ -59,7 +58,6 @@ Header files for doing development with the Netscape Portable Runtime.
 
 cp ./mozilla/nsprpub/config/nspr-config.in ./mozilla/nsprpub/config/nspr-config-pc.in
 %patch1 -p0
-%patch2 -p0
 
 cp %{SOURCE2} ./mozilla/nsprpub/config/
 
@@ -72,12 +70,14 @@ cp %{SOURCE2} ./mozilla/nsprpub/config/
 	--enable-64bit \
 %endif
 	--enable-optimize="%{optflags}" \
-	--disable-debug
+	--disable-debug \
+	--enable-ipv6 \
+	--with-pthreads
 
 %make
 
 %install
-make real_install DESTDIR=%{buildroot}
+%makeinstall_std 
 
 NSPR_LIBS=`./config/nspr-config --libs`
 NSPR_CFLAGS=`./config/nspr-config --cflags`
@@ -130,5 +130,3 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
 %{_includedir}/nspr4
 %{_libdir}/pkgconfig/nspr.pc
 %{_bindir}/nspr-config
-
-
