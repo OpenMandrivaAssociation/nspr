@@ -7,7 +7,7 @@ Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
 Version:	4.7.3
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	MPL/GPL/LGPL
 Group:		System/Libraries
 URL:		http://www.mozilla.org/projects/nspr/
@@ -42,6 +42,11 @@ Obsoletes:	nspr-devel
 Obsoletes:	%{libname}-devel
 Provides:	nspr-devel = %{epoch_nspr}:%{version}-%{release}
 Provides:	libnspr-devel = %{epoch_nspr}:%{version}-%{release}
+# explicitly provides those, since the libs are not in the develpackage
+# (and are not symlink so find-provides does not do it magically)
+Provides:	devel(libnspr4.so)
+Provides:	devel(libplc4.so)
+Provides:	devel(libplds4.so)
 
 %description -n %{develname}
 Header files for doing development with the Netscape Portable Runtime.
