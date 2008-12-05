@@ -44,9 +44,15 @@ Provides:	nspr-devel = %{epoch_nspr}:%{version}-%{release}
 Provides:	libnspr-devel = %{epoch_nspr}:%{version}-%{release}
 # explicitly provides those, since the libs are not in the develpackage
 # (and are not symlink so find-provides does not do it magically)
-Provides:	devel(libnspr4.so)
-Provides:	devel(libplc4.so)
-Provides:	devel(libplds4.so)
+%ifarch x86_64 ia64 amd64 sparc64 ppc64
+Provides:	devel(libnspr%{major_nspr}(64bit).so)
+Provides:	devel(libplc%{major_nspr}(64bit).so)
+Provides:	devel(libplds%{major_nspr}(64bit).so)
+%else
+Provides:	devel(libnspr%{major_nspr}.so)
+Provides:	devel(libplc%{major_nspr}.so)
+Provides:	devel(libplds%{major_nspr}.so)
+%endif
 
 %description -n %{develname}
 Header files for doing development with the Netscape Portable Runtime.
