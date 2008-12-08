@@ -7,7 +7,7 @@ Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
 Version:	4.7.3
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	MPL/GPL/LGPL
 Group:		System/Libraries
 URL:		http://www.mozilla.org/projects/nspr/
@@ -42,17 +42,6 @@ Obsoletes:	nspr-devel
 Obsoletes:	%{libname}-devel
 Provides:	nspr-devel = %{epoch_nspr}:%{version}-%{release}
 Provides:	libnspr-devel = %{epoch_nspr}:%{version}-%{release}
-# explicitly provides those, since the libs are not in the develpackage
-# (and are not symlink so find-provides does not do it magically)
-%ifarch x86_64 ia64 amd64 sparc64 ppc64
-Provides:	devel(libnspr%{major_nspr}(64bit).so)
-Provides:	devel(libplc%{major_nspr}(64bit).so)
-Provides:	devel(libplds%{major_nspr}(64bit).so)
-%else
-Provides:	devel(libnspr%{major_nspr}.so)
-Provides:	devel(libplc%{major_nspr}.so)
-Provides:	devel(libplds%{major_nspr}.so)
-%endif
 
 %description -n %{develname}
 Header files for doing development with the Netscape Portable Runtime.
@@ -77,7 +66,7 @@ cp %{SOURCE2} ./mozilla/nsprpub/config/
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--includedir=%{_includedir}/nspr4 \
-%ifarch x86_64 ppc64 ia64 s390x
+%ifarch x86_64 ppc64 ia64 s390x sparc64
 	--enable-64bit \
 %endif
 	--enable-optimize="%{optflags}" \
@@ -109,6 +98,7 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
                      %{buildroot}/%{_libdir}/pkgconfig/nspr.pc
 
 %{__mkdir_p} %{buildroot}/%{_bindir}
+%{__mkdir_p} $RPM_BUILD_ROOT/%{_lib}
 %{__cp} ./config/nspr-config-pc %{buildroot}/%{_bindir}/nspr-config
 
 # Get rid of the things we don't want installed (per upstream)
@@ -120,6 +110,13 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
    %{buildroot}/%{_libdir}/libplds4.a \
    %{buildroot}/%{_datadir}/aclocal/nspr.m4 \
    %{buildroot}/%{_includedir}/nspr4/md
+
+# nb: those symlinks helps having devel(xxx) provides (through find-provides)
+for file in libnspr4.so libplc4.so libplds4.so
+do
+  mv -f $RPM_BUILD_ROOT/%{_libdir}/$file $RPM_BUILD_ROOT/%{_lib}/$file
+  ln -sf ../../%{_lib}/$file $RPM_BUILD_ROOT/%{_libdir}/$file
+done
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -133,12 +130,15 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/libnspr4.so
-%{_libdir}/libplc4.so
-%{_libdir}/libplds4.so
+/%{_lib}/libnspr4.so
+/%{_lib}/libplc4.so
+/%{_lib}/libplds4.so
 
 %files -n %{develname}
 %defattr(-,root,root)
+%{_libdir}/libnspr4.so
+%{_libdir}/libplc4.so
+%{_libdir}/libplds4.so
 %{_includedir}/nspr4
 %{_libdir}/pkgconfig/nspr.pc
 %{_bindir}/nspr-config
