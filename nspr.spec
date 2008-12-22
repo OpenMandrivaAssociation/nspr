@@ -7,7 +7,7 @@ Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
 Version:	4.7.3
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	MPLv1.1 or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 URL:		http://www.mozilla.org/projects/nspr/
@@ -63,6 +63,9 @@ cp ./mozilla/nsprpub/config/nspr-config.in ./mozilla/nsprpub/config/nspr-config-
 cp %{SOURCE2} ./mozilla/nsprpub/config/
 
 %build
+%setup_compile_flags
+
+# (tpg) don't use macro here
 ./mozilla/nsprpub/configure \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
@@ -98,25 +101,25 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
                      -e "s,%%FULL_NSPR_CFLAGS%%,$NSPR_CFLAGS,g" >> \
                      %{buildroot}/%{_libdir}/pkgconfig/nspr.pc
 
-%{__mkdir_p} %{buildroot}/%{_bindir}
-%{__mkdir_p} $RPM_BUILD_ROOT/%{_lib}
+%{__mkdir_p} %{buildroot}%{_bindir}
+%{__mkdir_p} %{buildroot}/%{_lib}
 %{__cp} ./config/nspr-config-pc %{buildroot}/%{_bindir}/nspr-config
 
 # Get rid of the things we don't want installed (per upstream)
 %{__rm} -rf \
-   %{buildroot}/%{_bindir}/compile-et.pl \
-   %{buildroot}/%{_bindir}/prerr.properties \
-   %{buildroot}/%{_libdir}/libnspr4.a \
-   %{buildroot}/%{_libdir}/libplc4.a \
-   %{buildroot}/%{_libdir}/libplds4.a \
-   %{buildroot}/%{_datadir}/aclocal/nspr.m4 \
-   %{buildroot}/%{_includedir}/nspr4/md
+   %{buildroot}%{_bindir}/compile-et.pl \
+   %{buildroot}%{_bindir}/prerr.properties \
+   %{buildroot}%{_libdir}/libnspr4.a \
+   %{buildroot}%{_libdir}/libplc4.a \
+   %{buildroot}%{_libdir}/libplds4.a \
+   %{buildroot}%{_datadir}/aclocal/nspr.m4 \
+   %{buildroot}%{_includedir}/nspr4/md
 
 # nb: those symlinks helps having devel(xxx) provides (through find-provides)
 for file in libnspr4.so libplc4.so libplds4.so
 do
-  mv -f $RPM_BUILD_ROOT/%{_libdir}/$file $RPM_BUILD_ROOT/%{_lib}/$file
-  ln -sf ../../%{_lib}/$file $RPM_BUILD_ROOT/%{_libdir}/$file
+  mv -f %{buildroot}%{_libdir}/$file %{buildroot}/%{_lib}/$file
+  ln -sf ../../%{_lib}/$file %{buildroot}%{_libdir}/$file
 done
 
 %clean
