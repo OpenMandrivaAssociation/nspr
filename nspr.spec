@@ -6,7 +6,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
-Version:	4.7.4
+Version:	4.8
 Release:	%mkrel 1
 License:	MPLv1.1 or GPLv2+ or LGPLv2+
 Group:		System/Libraries
@@ -73,7 +73,7 @@ cp %{SOURCE2} ./mozilla/nsprpub/config/
 %ifarch x86_64 ppc64 ia64 s390x sparc64
 	--enable-64bit \
 %endif
-	--enable-optimize="%{optflags}" \
+	--enable-optimize="-O2" \
 	--disable-debug \
 	--enable-ipv6 \
 	--with-pthreads \
