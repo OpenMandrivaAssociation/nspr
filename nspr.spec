@@ -3,11 +3,20 @@
 %define libname %mklibname nspr %{major_nspr}
 %define develname %mklibname nspr -d
 
+%if %mandriva_branch == Cooker
+# Cooker
+%define release %mkrel 2
+%else
+# Old distros
+%define subrel 2
+%define release %mkrel 0
+%endif
+
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
 Version:	4.8.4
-Release:	%mkrel 1
+Release:	%{release}
 License:	MPLv1.1 or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 URL:		http://www.mozilla.org/projects/nspr/
