@@ -5,10 +5,10 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 1
+%define release %mkrel 2
 %else
 # Old distros
-%define subrel 2
+%define subrel 1
 %define release %mkrel 0
 %endif
 
@@ -72,7 +72,9 @@ cp ./mozilla/nsprpub/config/nspr-config.in ./mozilla/nsprpub/config/nspr-config-
 cp %{SOURCE2} ./mozilla/nsprpub/config/
 
 %build
+%if %mdkversion >= 200900
 %setup_compile_flags
+%endif
 
 # (tpg) don't use macro here
 ./mozilla/nsprpub/configure \
