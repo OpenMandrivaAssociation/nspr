@@ -5,11 +5,11 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel -c beta2 1
+%define release %mkrel 1
 %else
 # Old distros
 %define subrel 1
-%define release %mkrel -c beta2 1
+%define release %mkrel 1
 %endif
 
 Summary:	Netscape Portable Runtime
