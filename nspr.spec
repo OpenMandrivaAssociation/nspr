@@ -5,7 +5,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 1
+%define release %mkrel 2
 %else
 # Old distros
 %define subrel 1
@@ -117,7 +117,7 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
 
 %{__mkdir_p} %{buildroot}%{_bindir}
 %{__mkdir_p} %{buildroot}/%{_lib}
-%{__cp} ./config/nspr-config-pc %{buildroot}/%{_bindir}/nspr-config
+install -m755 -D ./config/nspr-config-pc %{buildroot}/%{_bindir}/nspr-config
 
 # Get rid of the things we don't want installed (per upstream)
 %{__rm} -rf \
