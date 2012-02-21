@@ -15,16 +15,15 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
-Version:	4.8.9
+Version:	4.9
 Release:	%{release}
-License:	MPLv1.1 or GPLv2+ or LGPLv2+
+License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 URL:		http://www.mozilla.org/projects/nspr/
 Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Virtual package, not built.
@@ -32,9 +31,8 @@ Virtual package, not built.
 %package -n %{libname}
 Summary:	Netscape Portable Runtime
 Group:		System/Libraries
-Obsoletes:	mozilla-nspr
-Provides:	nspr = %{epoch_nspr}:%{version}-%{release}
-Provides:	mozilla-nspr = %{epoch_nspr}:%{version}-%{release}
+Provides:	nspr = %{EVRD}
+%rename	mozilla-nspr
 
 %description -n %{libname}
 NSPR provides platform independence for non-GUI operating system
@@ -46,18 +44,19 @@ memory management (malloc and free) and shared library linking.
 Summary:	Development libraries for the Netscape Portable Runtime
 Group:		Development/C++
 Requires:	%{libname} = %{epoch_nspr}:%{version}-%{release}
-Obsoletes:	mozilla-nspr-devel
-Obsoletes:	nspr-devel
-Obsoletes:	%{libname}-devel
-Provides:	nspr-devel = %{epoch_nspr}:%{version}-%{release}
-Provides:	libnspr-devel = %{epoch_nspr}:%{version}-%{release}
+Provides:	nspr-devel = %{EVRD}
+Provides:	libnspr-devel = %{EVRD}
 Conflicts:	%{libname} < 2:4.7.3-3
+%rename mozilla-nspr-devel
+%rename %{libname}-devel
 
 %description -n %{develname}
 Header files for doing development with the Netscape Portable Runtime.
 
 %prep
 %setup -q
+chmod -R a+r *
+find . -name '*.h' -executable -exec chmod -x {} \;
 
 # Original nspr-config is not suitable for our distribution,
 # because on different platforms it contains different dynamic content.
@@ -67,14 +66,12 @@ Header files for doing development with the Netscape Portable Runtime.
 # that go into nspr.pc for pkg-config.
 
 cp ./mozilla/nsprpub/config/nspr-config.in ./mozilla/nsprpub/config/nspr-config-pc.in
-%patch1 -p0
+%patch1 -p1
 
 cp %{SOURCE2} ./mozilla/nsprpub/config/
 
 %build
-%if %mdkversion >= 200900
 %setup_compile_flags
-%endif
 
 # (tpg) don't use macro here
 ./mozilla/nsprpub/configure \
@@ -135,16 +132,6 @@ do
   mv -f %{buildroot}%{_libdir}/$file %{buildroot}/%{_lib}/$file
   ln -sf ../../%{_lib}/$file %{buildroot}%{_libdir}/$file
 done
-
-%clean
-%{__rm} -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files -n %{libname}
 %defattr(-,root,root)
