@@ -5,7 +5,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 1
+%define release %mkrel 2
 %else
 # Old distros
 %define subrel 1
@@ -44,8 +44,8 @@ memory management (malloc and free) and shared library linking.
 Summary:	Development libraries for the Netscape Portable Runtime
 Group:		Development/C++
 Requires:	%{libname} = %{epoch_nspr}:%{version}-%{release}
-Provides:	nspr-devel = %{EVRD}
-Provides:	libnspr-devel = %{EVRD}
+Provides:	nspr-devel = %{epoch_nspr}:%{version}-%{release}
+Provides:	libnspr-devel = %{epoch_nspr}:%{version}-%{release}
 Conflicts:	%{libname} < 2:4.7.3-3
 %rename mozilla-nspr-devel
 %rename %{libname}-devel
