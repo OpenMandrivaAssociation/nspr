@@ -5,7 +5,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 2
+%define release %mkrel 1
 %else
 # Old distros
 %define subrel 1
@@ -15,12 +15,12 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
-Version:	4.9.0
+Version:	4.9.1
 Release:	%{release}
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 URL:		http://www.mozilla.org/projects/nspr/
-Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v%{version}/src/%{name}-4.9.tar.gz
+Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
@@ -55,7 +55,7 @@ Header files for doing development with the Netscape Portable Runtime.
 
 %prep
 
-%setup -q -n %{name}-4.9
+%setup -q -n %{name}-%{version}
 
 chmod -R a+r *
 find . -name '*.h' -executable -exec chmod -x {} \;
