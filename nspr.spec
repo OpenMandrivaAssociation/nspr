@@ -5,17 +5,17 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 1
+%define release 1
 %else
 # Old distros
 %define subrel 1
-%define release %mkrel 0
+%define release 0
 %endif
 
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		%{epoch_nspr}
-Version:	4.9.1
+Version:	4.9.2
 Release:	%{release}
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
