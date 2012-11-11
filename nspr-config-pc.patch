@@ -1,0 +1,51 @@
+diff -Naur nspr-4.9.1/mozilla/nsprpub/config/nspr-config-pc.in nspr-4.9.1.oden/mozilla/nsprpub/config/nspr-config-pc.in
+--- nspr-4.9.1/mozilla/nsprpub/config/nspr-config-pc.in	2012-06-05 12:22:26.000000000 +0200
++++ nspr-4.9.1.oden/mozilla/nsprpub/config/nspr-config-pc.in	2012-06-05 12:22:35.000000000 +0200
+@@ -102,7 +102,7 @@
+     includedir=@includedir@
+ fi
+ if test -z "$libdir"; then
+-    libdir=@libdir@
++    libdir=`pkg-config --variable=libdir nspr`
+ fi
+ 
+ if test "$echo_prefix" = "yes"; then
+@@ -136,12 +136,12 @@
+       if test -n "$lib_nspr"; then
+ 	libdirs="$libdirs -lnspr${major_version}"
+       fi
+-      os_ldflags="@LDFLAGS@"
++      os_ldflags=`pkg-config --variable=ldflags nspr`
+       for i in $os_ldflags ; do
+ 	if echo $i | grep \^-L >/dev/null; then
+ 	  libdirs="$libdirs $i"
+         fi
+       done
+-      echo $libdirs @OS_LIBS@
++      echo $libdirs `pkg-config --variable=os_libs nspr`
+ fi      
+ 
+diff -Naur nspr-4.9.1/mozilla/nsprpub/configure nspr-4.9.1.oden/mozilla/nsprpub/configure
+--- nspr-4.9.1/mozilla/nsprpub/configure	2012-05-19 18:52:03.000000000 +0200
++++ nspr-4.9.1.oden/mozilla/nsprpub/configure	2012-06-05 12:24:07.000000000 +0200
+@@ -6675,6 +6675,8 @@
+     config/nsprincl.mk
+     config/nsprincl.sh
+     config/nspr-config
++    config/nspr-config-pc
++    config/nspr-config-vars
+     config/nspr.pc
+     lib/Makefile
+     lib/ds/Makefile
+diff -Naur nspr-4.9.1/mozilla/nsprpub/configure.in nspr-4.9.1.oden/mozilla/nsprpub/configure.in
+--- nspr-4.9.1/mozilla/nsprpub/configure.in	2012-05-19 18:52:03.000000000 +0200
++++ nspr-4.9.1.oden/mozilla/nsprpub/configure.in	2012-06-05 12:24:26.000000000 +0200
+@@ -3312,6 +3312,8 @@
+     config/nsprincl.mk
+     config/nsprincl.sh
+     config/nspr-config
++    config/nspr-config-pc
++    config/nspr-config-vars
+     config/nspr.pc
+     lib/Makefile
+     lib/ds/Makefile

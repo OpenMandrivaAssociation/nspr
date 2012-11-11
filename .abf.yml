@@ -1,0 +1,4 @@
+sources:
+  "nspr-4.9.2.tar.gz:"	455eab365f8fd732a4b014ca0af685f3c2dec598
+  "nspr-config-vars.in:"	ca1ec22ec23134e8aab2589db33057439a75c2bd
+  "nspr.pc.in:"	6d3a40116e513721b782ad25d21447e3d3a91d6d
