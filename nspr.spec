@@ -14,6 +14,8 @@ Source0:	https://ftp.mozilla.org/pub/mozilla.org/%{name}/releases/v%{version}/sr
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
+Patch2:		nspr-aarch64.patch
+Patch3:		nspr-prcpucfg-aarch64.patch
 
 %description
 Virtual package, not built.
@@ -54,10 +56,16 @@ find . -name '*.h' -executable -exec chmod -x {} \;
 
 cp ./mozilla/nsprpub/config/nspr-config.in ./mozilla/nsprpub/config/nspr-config-pc.in
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 cp %{SOURCE2} ./mozilla/nsprpub/config/
 
+
 %build
+# partial RELRO support as a security enhancement
+LDFLAGS+=-Wl,-z,relro
+export LDFLAGS
 %setup_compile_flags
 
 # (tpg) don't use macro here
@@ -68,10 +76,13 @@ cp %{SOURCE2} ./mozilla/nsprpub/config/
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--includedir=%{_includedir}/nspr4 \
-%ifarch x86_64 ppc64 ia64 s390x sparc64
+%ifarch x86_64 ppc64 ia64 s390x sparc64 aarch64
 	--enable-64bit \
 %endif
 	--enable-optimize="-O2" \
+%ifarch armv7l armv7hl armv7nhl
+	--enable-thumb2 \
+%endif
 	--disable-debug \
 	--enable-ipv6 \
 	--with-pthreads \
