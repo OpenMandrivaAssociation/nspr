@@ -70,12 +70,13 @@ export LDFLAGS
 
 # (tpg) don't use macro here
 ./mozilla/nsprpub/configure \
-	--build=%{_target_platform} \
-	--host=%{_host} \
+	--build=%{_host_platform} \
+	--host=%{_target_platform} \
 	--target=%{_target_platform} \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--includedir=%{_includedir}/nspr4 \
+	--host=%{_host_platform} \
 %ifarch x86_64 ppc64 ia64 s390x sparc64 aarch64
 	--enable-64bit \
 %endif
