@@ -1,6 +1,7 @@
-diff -urN nspr-4.9.2/mozilla/nsprpub/pr/include/md/_linux.cfg nspr-4.9.2-aarch64/mozilla/nsprpub/pr/include/md/_linux.cfg
---- nspr-4.9.2/mozilla/nsprpub/pr/include/md/_linux.cfg	2012-05-18 15:55:29.000000000 -0600
-+++ nspr-4.9.2-aarch64/mozilla/nsprpub/pr/include/md/_linux.cfg	2012-11-07 14:33:28.442278157 -0700
+diff -urN nspr-4.9.2/nspr/pr/include/md/_linux.cfg nspr-4.9.2-aarch64/nspr/pr/include/md/_linux.cfg
+--- nspr-4.9.2/nspr/pr/include/md/_linux.cfg	2012-05-18 15:55:29.000000000 -0600
++++ nspr-4.9.2-aarch64/nspr/pr/include/md/_linux.cfg	2012-11-07 14:33:28.442278157 -0700
+nspr/pr/include/md
 @@ -812,6 +812,52 @@
  #define PR_BYTES_PER_WORD_LOG2   2
  #define PR_BYTES_PER_DWORD_LOG2  3
@@ -54,9 +55,9 @@ diff -urN nspr-4.9.2/mozilla/nsprpub/pr/include/md/_linux.cfg nspr-4.9.2-aarch64
  #else
  
  #error "Unknown CPU architecture"
-diff -urN nspr-4.9.2/mozilla/nsprpub/pr/include/md/_linux.h nspr-4.9.2-aarch64/mozilla/nsprpub/pr/include/md/_linux.h
---- nspr-4.9.2/mozilla/nsprpub/pr/include/md/_linux.h	2012-03-06 06:13:52.000000000 -0700
-+++ nspr-4.9.2-aarch64/mozilla/nsprpub/pr/include/md/_linux.h	2012-11-07 15:01:29.175016701 -0700
+diff -urN nspr-4.9.2/nspr/pr/include/md/_linux.h nspr-4.9.2-aarch64/nspr/pr/include/md/_linux.h
+--- nspr-4.9.2/nspr/pr/include/md/_linux.h	2012-03-06 06:13:52.000000000 -0700
++++ nspr-4.9.2-aarch64/nspr/pr/include/md/_linux.h	2012-11-07 15:01:29.175016701 -0700
 @@ -53,6 +53,8 @@
  #define _PR_SI_ARCHITECTURE "avr32"
  #elif defined(__m32r__)

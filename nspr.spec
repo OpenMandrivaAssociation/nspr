@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
-Version:	4.9.6
+Version:	4.10
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
@@ -14,7 +14,6 @@ Source0:	https://ftp.mozilla.org/pub/mozilla.org/%{name}/releases/v%{version}/sr
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
-Patch2:		nspr-aarch64.patch
 Patch3:		nspr-prcpucfg-aarch64.patch
 
 %description
@@ -54,12 +53,12 @@ find . -name '*.h' -executable -exec chmod -x {} \;
 # However, we need to use original nspr-config to produce some variables
 # that go into nspr.pc for pkg-config.
 
-cp ./mozilla/nsprpub/config/nspr-config.in ./mozilla/nsprpub/config/nspr-config-pc.in
+cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
 
-cp %{SOURCE2} ./mozilla/nsprpub/config/
+cp %{SOURCE2} ./nspr/config/
+
 
 
 %build
@@ -69,7 +68,7 @@ export LDFLAGS
 %setup_compile_flags
 
 # (tpg) don't use macro here
-./mozilla/nsprpub/configure \
+./nspr/configure \
 	--build=%{_host_platform} \
 	--host=%{_target_platform} \
 	--target=%{_target_platform} \

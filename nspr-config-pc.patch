@@ -1,6 +1,6 @@
-diff -Naur nspr-4.9.1/mozilla/nsprpub/config/nspr-config-pc.in nspr-4.9.1.oden/mozilla/nsprpub/config/nspr-config-pc.in
---- nspr-4.9.1/mozilla/nsprpub/config/nspr-config-pc.in	2012-06-05 12:22:26.000000000 +0200
-+++ nspr-4.9.1.oden/mozilla/nsprpub/config/nspr-config-pc.in	2012-06-05 12:22:35.000000000 +0200
+diff -Naur nspr-4.9.1/nspr/config/nspr-config-pc.in nspr-4.9.1.oden/nspr/config/nspr-config-pc.in
+--- nspr-4.9.1/nspr/config/nspr-config-pc.in	2012-06-05 12:22:26.000000000 +0200
++++ nspr-4.9.1.oden/nspr/config/nspr-config-pc.in	2012-06-05 12:22:35.000000000 +0200
 @@ -102,7 +102,7 @@
      includedir=@includedir@
  fi
@@ -25,9 +25,9 @@ diff -Naur nspr-4.9.1/mozilla/nsprpub/config/nspr-config-pc.in nspr-4.9.1.oden/m
 +      echo $libdirs `pkg-config --variable=os_libs nspr`
  fi      
  
-diff -Naur nspr-4.9.1/mozilla/nsprpub/configure nspr-4.9.1.oden/mozilla/nsprpub/configure
---- nspr-4.9.1/mozilla/nsprpub/configure	2012-05-19 18:52:03.000000000 +0200
-+++ nspr-4.9.1.oden/mozilla/nsprpub/configure	2012-06-05 12:24:07.000000000 +0200
+diff -Naur nspr-4.9.1/nspr/configure nspr-4.9.1.oden/nspr/configure
+--- nspr-4.9.1/nspr/configure	2012-05-19 18:52:03.000000000 +0200
++++ nspr-4.9.1.oden/nspr/configure	2012-06-05 12:24:07.000000000 +0200
 @@ -6675,6 +6675,8 @@
      config/nsprincl.mk
      config/nsprincl.sh
@@ -37,9 +37,9 @@ diff -Naur nspr-4.9.1/mozilla/nsprpub/configure nspr-4.9.1.oden/mozilla/nsprpub/
      config/nspr.pc
      lib/Makefile
      lib/ds/Makefile
-diff -Naur nspr-4.9.1/mozilla/nsprpub/configure.in nspr-4.9.1.oden/mozilla/nsprpub/configure.in
---- nspr-4.9.1/mozilla/nsprpub/configure.in	2012-05-19 18:52:03.000000000 +0200
-+++ nspr-4.9.1.oden/mozilla/nsprpub/configure.in	2012-06-05 12:24:26.000000000 +0200
+diff -Naur nspr-4.9.1/nspr/configure.in nspr-4.9.1.oden/nspr/configure.in
+--- nspr-4.9.1/nspr/configure.in	2012-05-19 18:52:03.000000000 +0200
++++ nspr-4.9.1.oden/nspr/configure.in	2012-06-05 12:24:26.000000000 +0200
 @@ -3312,6 +3312,8 @@
      config/nsprincl.mk
      config/nsprincl.sh
