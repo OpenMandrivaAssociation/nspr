@@ -9,7 +9,7 @@ Version:	4.10
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
-URL:		http://www.mozilla.org/projects/nspr/
+Url:		http://www.mozilla.org/projects/nspr/
 Source0:	https://ftp.mozilla.org/pub/mozilla.org/%{name}/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
@@ -59,8 +59,6 @@ cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
 
 cp %{SOURCE2} ./nspr/config/
 
-
-
 %build
 # partial RELRO support as a security enhancement
 LDFLAGS+=-Wl,-z,relro
@@ -96,10 +94,10 @@ export LDFLAGS
 NSPR_LIBS=`./config/nspr-config --libs`
 NSPR_CFLAGS=`./config/nspr-config --cflags`
 NSPR_VERSION=`./config/nspr-config --version`
-%{__mkdir_p} %{buildroot}/%{_libdir}/pkgconfig
+mkdir -p %{buildroot}/%{_libdir}/pkgconfig
 
 cat ./config/nspr-config-vars > \
-                     %{buildroot}/%{_libdir}/pkgconfig/nspr.pc
+	%{buildroot}/%{_libdir}/pkgconfig/nspr.pc
 
 cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
                      -e "s,%%prefix%%,%{_prefix},g" \
@@ -110,12 +108,12 @@ cat %{SOURCE1} | sed -e "s,%%libdir%%,%{_libdir},g" \
                      -e "s,%%FULL_NSPR_CFLAGS%%,$NSPR_CFLAGS,g" >> \
                      %{buildroot}/%{_libdir}/pkgconfig/nspr.pc
 
-%{__mkdir_p} %{buildroot}%{_bindir}
-%{__mkdir_p} %{buildroot}/%{_lib}
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}/%{_lib}
 install -m755 -D ./config/nspr-config-pc %{buildroot}/%{_bindir}/nspr-config
 
 # Get rid of the things we don't want installed (per upstream)
-%{__rm} -rf \
+rm -rf \
    %{buildroot}%{_bindir}/compile-et.pl \
    %{buildroot}%{_bindir}/prerr.properties \
    %{buildroot}%{_libdir}/libnspr4.a \
