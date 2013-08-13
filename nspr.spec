@@ -60,7 +60,9 @@ cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
 cp %{SOURCE2} ./nspr/config/
 
 %build
-%serverbuild
+# partial RELRO support as a security enhancement
+LDFLAGS+=-Wl,-z,relro
+export LDFLAGS
 %setup_compile_flags
 
 # (tpg) don't use macro here
