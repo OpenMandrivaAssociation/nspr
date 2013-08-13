@@ -60,7 +60,7 @@ cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
 cp %{SOURCE2} ./nspr/config/
 
 %build
-%serverbuild_hardened
+%serverbuild
 %setup_compile_flags
 
 # (tpg) don't use macro here
