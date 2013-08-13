@@ -1,4 +1,4 @@
-%define major	4
+%define major 4
 %define libname %mklibname nspr %{major}
 %define devname %mklibname nspr -d
 
@@ -6,7 +6,7 @@ Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
 Version:	4.10
-Release:	1
+Release:	2
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 Url:		http://www.mozilla.org/projects/nspr/
@@ -60,9 +60,7 @@ cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
 cp %{SOURCE2} ./nspr/config/
 
 %build
-# partial RELRO support as a security enhancement
-LDFLAGS+=-Wl,-z,relro
-export LDFLAGS
+%serverbuild_hardened
 %setup_compile_flags
 
 # (tpg) don't use macro here
