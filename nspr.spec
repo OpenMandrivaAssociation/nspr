@@ -14,6 +14,7 @@ Source0:	https://ftp.mozilla.org/pub/mozilla.org/%{name}/releases/v%{version}/sr
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
+Patch2:		fix-config-sg-aarch64.patch
 Patch3:		nspr-prcpucfg-aarch64.patch
 
 %description
@@ -55,6 +56,7 @@ find . -name '*.h' -executable -exec chmod -x {} \;
 
 cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
 %patch1 -p1
+%patch2 -p1
 %patch3 -p1
 
 cp %{SOURCE2} ./nspr/config/
