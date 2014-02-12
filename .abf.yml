@@ -3,4 +3,4 @@ removed_sources:
   nspr-4.9.5.tar.gz: 03885e992607e2be975f6525c6764c2167fe2eff
   nspr-4.9.6.tar.gz: 4de89141c62f1a8e93f8dabe0ecb6cf30f8802df
 sources:
-  nspr-4.10.2.tar.gz: 650e4aa35d58624bc1083ed585c81c4af09cf23c
+  nspr-4.10.3.tar.gz: afcb28ed2b159cb059141bdf5f2e001374a845cf
