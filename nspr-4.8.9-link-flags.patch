@@ -1,0 +1,25 @@
+diff --git a/nspr/config/autoconf.mk.in b/nspr/config/autoconf.mk.in
+index 8c9a43a..570c9fa 100644
+--- a/nspr/config/autoconf.mk.in
++++ b/nspr/config/autoconf.mk.in
+@@ -90,6 +90,7 @@ OS_DLLFLAGS	= @OS_DLLFLAGS@
+ DLLFLAGS	= @DLLFLAGS@
+ EXEFLAGS  = @EXEFLAGS@
+ OPTIMIZER	= @OPTIMIZER@
++LD_CFLAGS	= @CFLAGS@
+ 
+ PROFILE_GEN_CFLAGS  = @PROFILE_GEN_CFLAGS@
+ PROFILE_GEN_LDFLAGS = @PROFILE_GEN_LDFLAGS@
+diff --git a/nspr/config/config.mk b/nspr/config/config.mk
+index 05db076..37c5998 100644
+--- a/nspr/config/config.mk
++++ b/nspr/config/config.mk
+@@ -40,7 +40,7 @@ NOMD_CFLAGS	= $(CC_ONLY_FLAGS) $(OPTIMIZER) $(NOMD_OS_CFLAGS)\
+ NOMD_CCFLAGS	= $(CCC_ONLY_FLAGS) $(OPTIMIZER) $(NOMD_OS_CFLAGS)\
+ 		  $(XP_DEFINE) $(DEFINES) $(INCLUDES) $(XCFLAGS)
+ 
+-LDFLAGS		= $(OS_LDFLAGS)
++LDFLAGS		= $(LD_CFLAGS) $(OS_LDFLAGS)
+ 
+ # Enable profile-guided optimization
+ ifndef NO_PROFILE_GUIDED_OPTIMIZE

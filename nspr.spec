@@ -5,8 +5,8 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
-Version:	4.10.8
-Release:	2
+Version:	4.10.9
+Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 Url:		http://www.mozilla.org/projects/nspr/
@@ -14,6 +14,7 @@ Source0:	https://ftp.mozilla.org/pub/mozilla.org/%{name}/releases/v%{version}/sr
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
+Patch2:		nspr-4.8.9-link-flags.patch
 
 %description
 Virtual package, not built.
@@ -53,10 +54,19 @@ find . -name '*.h' -executable -exec chmod -x {} \;
 # that go into nspr.pc for pkg-config.
 
 cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
-%patch1 -p1
+%apply_patches
 
 cp %{SOURCE2} ./nspr/config/
 
+# Respect LDFLAGS
+sed -i -e 's/\$(MKSHLIB) \$(OBJS)/\$(MKSHLIB) \$(LDFLAGS) \$(OBJS)/g' \
+	nspr/config/rules.mk
+
+mv nspr/configure.in nspr/configure.ac
+rm -f nspr/configure
+pushd nspr
+autoreconf -fiv
+popd
 
 %build
 # partial RELRO support as a security enhancement
@@ -76,7 +86,7 @@ export LDFLAGS
 	--enable-64bit \
 %endif
 	--enable-optimize="-O2" \
-%ifarch armv7l armv7hl armv7nhl
+%ifarch %arm
 	--enable-thumb2 \
 %endif
 	--disable-debug \
@@ -87,6 +97,11 @@ export LDFLAGS
 %make
 
 %install
+# hack
+# test\n\remove it on next update
+touch pr/src/libnspr4.a
+touch lib/ds/libplds4.a
+touch lib/libc/src/libplc4.a
 %makeinstall_std 
 
 NSPR_LIBS=`./config/nspr-config --libs`
