@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
-Version:	4.11
+Version:	4.12
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
