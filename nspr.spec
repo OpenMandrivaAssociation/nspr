@@ -10,7 +10,7 @@ Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 Url:		http://www.mozilla.org/projects/nspr/
-Source0:	https://ftp.mozilla.org/pub/mozilla.org/%{name}/releases/v%{version}/src/%{name}-%{version}.tar.gz
+Source0:	https://ftp.mozilla.org/pub/%{name}/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
