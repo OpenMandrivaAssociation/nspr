@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
-Version:	4.13.1
+Version:	4.14
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
@@ -48,7 +48,7 @@ find . -name '*.h' -executable -exec chmod -x {} \;
 
 # Original nspr-config is not suitable for our distribution,
 # because on different platforms it contains different dynamic content.
-# Therefore we produce an adjusted copy of nspr-config that will be 
+# Therefore we produce an adjusted copy of nspr-config that will be
 # identical on all platforms.
 # However, we need to use original nspr-config to produce some variables
 # that go into nspr.pc for pkg-config.
@@ -102,7 +102,7 @@ export LDFLAGS
 touch pr/src/libnspr4.a
 touch lib/ds/libplds4.a
 touch lib/libc/src/libplc4.a
-%makeinstall_std 
+%makeinstall_std
 
 NSPR_LIBS=`./config/nspr-config --libs`
 NSPR_CFLAGS=`./config/nspr-config --cflags`
