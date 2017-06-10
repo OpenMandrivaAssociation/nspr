@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
-Version:	4.14
+Version:	4.15
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
@@ -13,6 +13,10 @@ Url:		http://www.mozilla.org/projects/nspr/
 Source0:	https://ftp.mozilla.org/pub/%{name}/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
+# FIXME drop this patch as soon as configure stops barfing
+# We just cut out support for all legacy platforms as a workaround
+# for the bogus configure script.
+Patch0:		nspr-4.15-configure-syntax-errors.patch
 Patch1:		nspr-config-pc.patch
 Patch2:		nspr-4.8.9-link-flags.patch
 
