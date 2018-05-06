@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Epoch:		2
-Version:	4.18
+Version:	4.19
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
@@ -85,7 +85,7 @@ export LDFLAGS
 %ifarch x86_64 ppc64 ia64 s390x sparc64 aarch64
 	--enable-64bit \
 %endif
-	--enable-optimize="-O2" \
+	--enable-optimize="-O3" \
 %ifarch %arm
 	--enable-thumb2 \
 %endif
