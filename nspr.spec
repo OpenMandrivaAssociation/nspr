@@ -14,6 +14,7 @@ Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
 Patch2:		nspr-4.8.9-link-flags.patch
+Patch3:		nspr-riscv64.patch
 
 %description
 Virtual package, not built.
@@ -53,7 +54,7 @@ find . -name '*.h' -executable -exec chmod -x {} \;
 # that go into nspr.pc for pkg-config.
 
 cp ./nspr/config/nspr-config.in ./nspr/config/nspr-config-pc.in
-%apply_patches
+%autopatch -p1
 
 cp %{SOURCE2} ./nspr/config/
 
@@ -68,6 +69,7 @@ autoreconf -fiv
 popd
 
 %build
+%config_update
 # partial RELRO support as a security enhancement
 LDFLAGS+=-Wl,-z,relro
 export LDFLAGS
@@ -81,7 +83,7 @@ export LDFLAGS
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--includedir=%{_includedir}/nspr4 \
-%ifarch %{x86_64} ppc64 ia64 s390x sparc64 %{aarch64}
+%ifarch %{x86_64} ppc64 ia64 s390x sparc64 %{aarch64} riscv64
 	--enable-64bit \
 %endif
 	--enable-optimize="%{optflags} -Ofast" \
