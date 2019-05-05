@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Version:	4.20
-Release:	2
+Release:	3
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 Url:		http://www.mozilla.org/projects/nspr/
@@ -14,7 +14,7 @@ Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
 Patch1:		nspr-config-pc.patch
 Patch2:		nspr-4.8.9-link-flags.patch
-Patch3:		nspr-riscv64.patch
+#Patch3:		nspr-riscv64.patch
 
 %description
 Virtual package, not built.
@@ -95,7 +95,7 @@ export LDFLAGS
 	--with-pthreads \
 	--with-mozilla
 
-%make
+%make_build
 
 %install
 # hack
@@ -103,7 +103,7 @@ export LDFLAGS
 touch pr/src/libnspr4.a
 touch lib/ds/libplds4.a
 touch lib/libc/src/libplc4.a
-%makeinstall_std
+%make_install
 
 NSPR_LIBS=`./config/nspr-config --libs`
 NSPR_CFLAGS=`./config/nspr-config --cflags`
