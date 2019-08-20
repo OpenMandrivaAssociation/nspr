@@ -1,5 +1,2 @@
-removed_sources:
-  nspr-4.19.tar.gz: 907221d51a1f8cca0c3a9e1af93c53e02f5e203b
-  nspr-4.20.tar.gz: ef1e2ca3205fd1658a69ada2e0436266ca3065b5
 sources:
-  nspr-4.21.tar.gz: 0ae8c710a52775e209b96aa6220362837b79b6c3
+  nspr-4.22.tar.gz: 69bd044d4a258a9c1cb1062a182fb8a30f0ad641
