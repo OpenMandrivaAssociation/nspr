@@ -4,7 +4,7 @@
 
 Summary:	Netscape Portable Runtime
 Name:		nspr
-Version:	4.29
+Version:	4.30
 Release:	1
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
@@ -62,11 +62,11 @@ cp %{SOURCE2} ./nspr/config/
 sed -i -e 's/\$(MKSHLIB) \$(OBJS)/\$(MKSHLIB) \$(LDFLAGS) \$(OBJS)/g' \
 	nspr/config/rules.mk
 
-mv nspr/configure.in nspr/configure.ac
-rm -f nspr/configure
-pushd nspr
-autoreconf -fiv
-popd
+#mv nspr/configure.in nspr/configure.ac
+#rm -f nspr/configure
+#pushd nspr
+#autoreconf -fiv
+#popd
 
 %build
 %config_update
