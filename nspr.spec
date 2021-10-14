@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Version:	4.32
-Release:	1
+Release:	2
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 Url:		http://www.mozilla.org/projects/nspr/
@@ -73,7 +73,7 @@ sed -i -e 's/\$(MKSHLIB) \$(OBJS)/\$(MKSHLIB) \$(LDFLAGS) \$(OBJS)/g' \
 # partial RELRO support as a security enhancement
 LDFLAGS+=-Wl,-z,relro
 export LDFLAGS
-%setup_compile_flags
+%set_build_flags
 
 # (tpg) don't use macro here
 ./nspr/configure \
@@ -105,9 +105,9 @@ touch lib/ds/libplds4.a
 touch lib/libc/src/libplc4.a
 %make_install
 
-NSPR_LIBS=`./config/nspr-config --libs`
-NSPR_CFLAGS=`./config/nspr-config --cflags`
-NSPR_VERSION=`./config/nspr-config --version`
+NSPR_LIBS=$(./config/nspr-config --libs)
+NSPR_CFLAGS=$(./config/nspr-config --cflags)
+NSPR_VERSION=$(./config/nspr-config --version)
 mkdir -p %{buildroot}/%{_libdir}/pkgconfig
 
 cat ./config/nspr-config-vars > \
@@ -155,4 +155,3 @@ done
 %{_includedir}/nspr4
 %{_libdir}/pkgconfig/nspr.pc
 %{_bindir}/nspr-config
-
