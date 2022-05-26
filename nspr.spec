@@ -5,7 +5,7 @@
 Summary:	Netscape Portable Runtime
 Name:		nspr
 Version:	4.33
-Release:	1
+Release:	2
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
 Url:		http://www.mozilla.org/projects/nspr/
@@ -87,7 +87,7 @@ export LDFLAGS
 	--enable-64bit \
 %endif
 	--enable-optimize="%{optflags} -O3" \
-%ifarch %arm
+%ifarch %{arm}
 	--enable-thumb2 \
 %endif
 	--disable-debug \
@@ -136,17 +136,10 @@ rm -rf \
    %{buildroot}%{_datadir}/aclocal/nspr.m4 \
    %{buildroot}%{_includedir}/nspr4/md
 
-# nb: those symlinks helps having devel(xxx) provides (through find-provides)
-for file in libnspr4.so libplc4.so libplds4.so
-do
-  mv -f %{buildroot}%{_libdir}/$file %{buildroot}/%{_lib}/$file
-  ln -sf ../../%{_lib}/$file %{buildroot}%{_libdir}/$file
-done
-
 %files -n %{libname}
-/%{_lib}/libnspr4.so
-/%{_lib}/libplc4.so
-/%{_lib}/libplds4.so
+%{_libdir}/libnspr4.so
+%{_libdir}/libplc4.so
+%{_libdir}/libplds4.so
 
 %files -n %{devname}
 %{_libdir}/libnspr4.so
