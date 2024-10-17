@@ -8,7 +8,7 @@ Version:	4.35
 Release:	2
 License:	MPL or GPLv2+ or LGPLv2+
 Group:		System/Libraries
-Url:		http://www.mozilla.org/projects/nspr/
+Url:		https://www.mozilla.org/projects/nspr/
 Source0:	https://ftp.mozilla.org/pub/nspr/releases/v%{version}/src/%{name}-%{version}.tar.gz
 Source1:	nspr.pc.in
 Source2:	nspr-config-vars.in
