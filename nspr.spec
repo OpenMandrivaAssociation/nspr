@@ -16,6 +16,8 @@ Patch1:		nspr-config-pc.patch
 Patch2:		nspr-4.8.9-link-flags.patch
 #Patch3:		nspr-riscv64.patch
 
+BuildRequires:	make
+
 %description
 Virtual package, not built.
 
