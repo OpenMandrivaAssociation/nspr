@@ -17,6 +17,7 @@ Patch2:		nspr-4.8.9-link-flags.patch
 #Patch3:		nspr-riscv64.patch
 
 BuildRequires:	make
+BuildRequires:	libtool
 
 %description
 Virtual package, not built.
