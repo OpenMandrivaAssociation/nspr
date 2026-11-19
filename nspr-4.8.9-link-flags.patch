@@ -1,15 +1,3 @@
-diff --git a/nspr/config/autoconf.mk.in b/nspr/config/autoconf.mk.in
-index 8c9a43a..570c9fa 100644
---- a/nspr/config/autoconf.mk.in
-+++ b/nspr/config/autoconf.mk.in
-@@ -90,6 +90,7 @@ OS_DLLFLAGS	= @OS_DLLFLAGS@
- DLLFLAGS	= @DLLFLAGS@
- EXEFLAGS  = @EXEFLAGS@
- OPTIMIZER	= @OPTIMIZER@
-+LD_CFLAGS	= @CFLAGS@
- 
- PROFILE_GEN_CFLAGS  = @PROFILE_GEN_CFLAGS@
- PROFILE_GEN_LDFLAGS = @PROFILE_GEN_LDFLAGS@
 diff --git a/nspr/config/config.mk b/nspr/config/config.mk
 index 05db076..37c5998 100644
 --- a/nspr/config/config.mk
